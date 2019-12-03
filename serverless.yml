@@ -1,0 +1,25 @@
+service: eriks-lambda # NOTE: update this with your service name
+
+provider:
+  profile: experiments
+  name: aws
+  runtime: python3.7
+
+  stage: dev
+  region: eu-north-1
+
+functions:
+  eriks-super-lambda:
+    handler: handler.get_body
+    events:
+      - http:
+          path: hello
+          method: GET
+          authorizer:
+            name: my-authorizer
+            type: request
+            identitySource: method.request.querystring.api_key
+  my-authorizer:
+    handler: handler.auth
+    environment:
+      PLUGIN_SECRET: 'very_secret'
