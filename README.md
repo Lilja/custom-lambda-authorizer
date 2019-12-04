@@ -2,7 +2,9 @@
 
 This is an example of a lambda authorizer using API gateway on AWS.
 
-There two lambda functions in one file with two different handlers. `handler.auth` and `handler.get_body`
+There two lambda functions in one file with two different handlers. `handler.auth` and `handler.get_body`.
+
+It uses `serverless` as the deploy framework.
 
 ## Requirements
 * `serverless`

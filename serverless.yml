@@ -1,12 +1,19 @@
 service: eriks-lambda # NOTE: update this with your service name
 
+vars:
+  stage: ${opt:stage, dev}
+  regions:
+    stage: eu-north-1
+    production: us-east-1
+
+
 provider:
   profile: experiments
   name: aws
   runtime: python3.7
 
-  stage: dev
-  region: eu-north-1
+  stage: ${self.vars.stage}
+  region: ${self.vars.regions.${self.vars.stage}}
 
 functions:
   eriks-super-lambda:
