@@ -1,19 +1,21 @@
 service: eriks-lambda # NOTE: update this with your service name
 
-vars:
-  stage: ${opt:stage, dev}
-  regions:
-    stage: eu-north-1
-    production: us-east-1
+plugins:
+  - serverless-domain-manager
 
+custom:
+  customDomain:
+    domainName: lilja-api.funnel.io
+    stage: ${self:provider.stage}
+    basePath: ''
+    createRoute53Record: true
 
 provider:
-  profile: experiments
   name: aws
   runtime: python3.7
 
-  stage: ${self.vars.stage}
-  region: ${self.vars.regions.${self.vars.stage}}
+  stage: ${opt:stage, 'stage'}
+  region: ${opt:region, 'eu-north-1'}
 
 functions:
   eriks-super-lambda:
